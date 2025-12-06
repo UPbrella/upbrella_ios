@@ -16,7 +16,7 @@ let allowedOrigins: [String] = ["upbrella.co.kr"]
 
 // auth origins will open in modal and show toolbar for back into the main origin.
 // These should also appear in Info.plist
-let authOrigins: [String] = ["kauth.kakao.com","kapi.kakao.com","appleid.apple.com","oapi.map.naver.com","navermaps.github.io","map.naver.com","","api.upbrella.co.kr","upbrella.co.kr","www.upbrella.co.kr","pf.kakao.com"]
+let authOrigins: [String] = ["kauth.kakao.com","kapi.kakao.com","appleid.apple.com","pf.kakao.com"]
 // allowedOrigins + authOrigins <= 10
 
 let platformCookie = Cookie(name: "app-platform", value: "iOS App Store")

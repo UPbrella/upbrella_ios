@@ -5,7 +5,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Capture Audio by user request</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Track current location by user request</string>
+	<string>업브렐라는 사용자의 현재 위치를 기반으로 가까운 우산 대여소를 찾고, 가장 가까운 반납 장소로 안내하기 위해 위치 정보를 사용합니다. 예를 들어, 지도를 열면 현재 위치에서 도보 거리 내의 대여소를 보여드립니다.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Capture Video by user request</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -99,17 +99,14 @@
 	<key>WKAppBoundDomains</key>
 	<array>
 		<string>upbrella.co.kr</string>
-<string>kauth.kakao.com</string>
-<string>kapi.kakao.com</string>
-<string>appleid.apple.com</string>
-<string>oapi.map.naver.com</string>
-<string>navermaps.github.io</string>
-<string>map.naver.com</string>
-<string></string>
-<string>api.upbrella.co.kr</string>
-<string>upbrella.co.kr</string>
-<string>www.upbrella.co.kr</string>
-<string>pf.kakao.com</string>
+		<string>kauth.kakao.com</string>
+		<string>kapi.kakao.com</string>
+		<string>appleid.apple.com</string>
+		<string>pf.kakao.com</string>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>nmap</string>
 	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
