@@ -21,6 +21,14 @@ func createWebView(container: UIView, WKSMH: WKScriptMessageHandler, WKND: WKNav
     config.allowsInlineMediaPlayback = true
     config.preferences.javaScriptCanOpenWindowsAutomatically = true
     config.preferences.setValue(true, forKey: "standalone")
+
+    // Use default data store for credential autofill
+    config.websiteDataStore = WKWebsiteDataStore.default()
+
+    // Enable autofill for better password/credential support
+    if #available(iOS 14.0, *) {
+        config.defaultWebpagePreferences.allowsContentJavaScript = true
+    }
     
     let webView = WKWebView(frame: calcWebviewFrame(webviewView: container, toolbarView: nil), configuration: config)
     setCustomCookie(webView: webView)
