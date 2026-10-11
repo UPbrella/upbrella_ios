@@ -36,7 +36,9 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         initWebView()
         initToolbarView()
         loadRootUrl()
-    
+
+        initProgressBar()
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
         
     }
@@ -179,8 +181,36 @@ class ViewController: UIViewController, WKNavigationDelegate, UIDocumentInteract
         }
     }
     
+    // UIProgressView는 두께를 못 바꾸고 iOS 26에서 채움 끝 모양이 트랙과 달라서 직접 그림.
+    // 위치·색은 스토리보드의 progressView 값을 그대로 씀
+    let barTrack = UIView()
+    let barFill = UIView()
+
+    func initProgressBar() {
+        let height: CGFloat = 8
+        let f = progressView.frame
+
+        progressView.isHidden = true
+
+        barTrack.frame = CGRect(x: f.minX, y: (f.midY - height / 2).rounded(), width: f.width, height: height)
+        barTrack.autoresizingMask = progressView.autoresizingMask
+        barTrack.backgroundColor = progressView.trackTintColor
+        barTrack.layer.cornerRadius = height / 2
+        barTrack.clipsToBounds = true
+
+        barFill.frame = CGRect(x: 0, y: 0, width: 0, height: height)
+        barFill.backgroundColor = progressView.tintColor
+        barFill.layer.cornerRadius = height / 2
+
+        barTrack.addSubview(barFill)
+        loadingView.addSubview(barTrack)
+    }
+
     func setProgress(_ progress: Float, _ animated: Bool) {
-        self.progressView.setProgress(progress, animated: animated);
+        let width = barTrack.bounds.width * CGFloat(progress)
+        UIView.animate(withDuration: animated ? 0.25 : 0) {
+            self.barFill.frame.size.width = width
+        }
     }
     
     
