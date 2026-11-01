@@ -111,6 +111,18 @@ func calcWebviewFrame(webviewView: UIView, toolbarView: UIToolbar?) -> CGRect{
 }
 
 extension ViewController: WKUIDelegate, WKDownloadDelegate {
+    @available(iOS 15.0, *)
+    func webView(_ webView: WKWebView, requestMediaCapturePermissionFor origin: WKSecurityOrigin,
+                 initiatedByFrame frame: WKFrameInfo, type: WKMediaCaptureType,
+                 decisionHandler: @escaping (WKPermissionDecision) -> Void) {
+        let trustedHost = allowedOrigins.contains { origin.host == $0 || origin.host.hasSuffix("." + $0) }
+        guard origin.protocol == "https", trustedHost, frame.isMainFrame, type == .camera else {
+            decisionHandler(.deny)
+            return
+        }
+        decisionHandler(.prompt)
+    }
+
     // redirect new tabs to main webview
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if (navigationAction.targetFrame == nil) {
@@ -130,7 +142,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
         if let requestUrl = navigationAction.request.url{
             if let requestHost = requestUrl.host {
                 // NOTE: Match auth origin first, because host origin may be a subset of auth origin and may therefore always match
-                let matchingAuthOrigin = authOrigins.first(where: { requestHost.range(of: $0) != nil })
+                let matchingAuthOrigin = authOrigins.first(where: { requestHost == $0 || requestHost.hasSuffix("." + $0) })
                 if (matchingAuthOrigin != nil) {
                     decisionHandler(.allow)
                     if (toolbarView.isHidden) {
@@ -140,7 +152,7 @@ extension ViewController: WKUIDelegate, WKDownloadDelegate {
                     return
                 }
 
-                let matchingHostOrigin = allowedOrigins.first(where: { requestHost.range(of: $0) != nil })
+                let matchingHostOrigin = allowedOrigins.first(where: { requestHost == $0 || requestHost.hasSuffix("." + $0) })
                 if (matchingHostOrigin != nil) {
                     // Open in main webview
                     decisionHandler(.allow)

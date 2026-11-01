@@ -8,11 +8,20 @@ struct Cookie {
 let gcmMessageIDKey = "00000000000" // update this with actual ID if using Firebase 
 
 // URL for first launch
+#if DEBUG
+let rootUrl = URL(string: ProcessInfo.processInfo.environment["UPBRELLA_USE_PRODUCTION"] == "1"
+                  ? "https://upbrella.co.kr" : "https://porodev.asuscomm.com/upbrella-dev/")!
+#else
 let rootUrl = URL(string: "https://upbrella.co.kr")!
+#endif
 
 // allowed origin is for what we are sticking to pwa domain
 // This should also appear in Info.plist
+#if DEBUG
+let allowedOrigins: [String] = ["upbrella.co.kr", "porodev.asuscomm.com"]
+#else
 let allowedOrigins: [String] = ["upbrella.co.kr"]
+#endif
 
 // auth origins will open in modal and show toolbar for back into the main origin.
 // These should also appear in Info.plist

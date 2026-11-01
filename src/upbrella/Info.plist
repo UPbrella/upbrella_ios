@@ -7,7 +7,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>업브렐라는 사용자의 현재 위치를 기반으로 가까운 우산 대여소를 찾고, 가장 가까운 반납 장소로 안내하기 위해 위치 정보를 사용합니다. 예를 들어, 지도를 열면 현재 위치에서 도보 거리 내의 대여소를 보여드립니다.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Capture Video by user request</string>
+	<string>우산 대여와 반납 QR을 스캔하기 위해 카메라를 사용합니다.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -32,7 +32,7 @@
 			<key>CFBundleURLName</key>
 			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array />
+			<array/>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -103,6 +103,7 @@
 		<string>kapi.kakao.com</string>
 		<string>appleid.apple.com</string>
 		<string>pf.kakao.com</string>
+		<string>porodev.asuscomm.com</string>
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
@@ -115,7 +116,7 @@
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
 	<key>UIApplicationShortcutItems</key>
-<array>
+	<array>
 		<dict>
 			<key>UIApplicationShortcutItemType</key>
 			<string>https://upbrella.co.kr/rental</string>
@@ -127,6 +128,9 @@
 			<string>https://upbrella.co.kr/return</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>우산 반납하기</string>
-		</dict></array>
+		</dict>
+	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>QR 사진을 선택해 우산 대여와 반납 코드를 확인합니다.</string>
 </dict>
 </plist>
